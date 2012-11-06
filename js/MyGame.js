@@ -16,27 +16,39 @@ function MyGame(canvasId) {
 		[40, 40,  360, 40,  360,  360, 40,  360, 40, 40]
 	];
 	this.cars = [
-		[
-			[20, 4, 40, 4, 40, 12, 20, 12, 20, 4],
-			[22, 3, 25, 3, 25, 4, 22, 4, 22, 3],
-			[35, 3, 38, 3, 38, 4, 35, 4, 35, 3],
-			[22, 12, 25, 12, 25, 13, 22, 13, 22, 12],
-			[35, 12, 38, 12, 38, 13, 35, 13, 35, 12],
-		],
-		[
-			[20, 16, 40, 16, 40, 24, 20, 24, 20, 16],
-			[22, 15, 25, 15, 25, 16, 22, 16, 22, 15],
-			[35, 15, 38, 15, 38, 16, 35, 16, 35, 15],
-			[22, 24, 25, 24, 25, 25, 22, 25, 22, 24],
-			[35, 24, 38, 24, 38, 25, 35, 25, 35, 24],
-		],
-		[
-			[20, 28, 40, 28, 40, 36, 20, 36, 20, 28],
-			[22, 27, 25, 27, 25, 28, 22, 28, 22, 27],
-			[35, 27, 38, 27, 38, 28, 35, 28, 35, 27],
-			[22, 36, 25, 36, 25, 37, 22, 37, 22, 36],
-			[35, 36, 38, 36, 38, 37, 35, 37, 35, 36],
-		]
+		{
+			speed: 5,
+			angle: 0,
+			lines: [
+				[20, 4, 40, 4, 40, 12, 20, 12, 20, 4],
+				[22, 3, 25, 3, 25, 4, 22, 4, 22, 3],
+				[35, 3, 38, 3, 38, 4, 35, 4, 35, 3],
+				[22, 12, 25, 12, 25, 13, 22, 13, 22, 12],
+				[35, 12, 38, 12, 38, 13, 35, 13, 35, 12],
+			]
+		},
+		{
+			speed: 0,
+			angle: 0,
+			lines: [
+				[20, 16, 40, 16, 40, 24, 20, 24, 20, 16],
+				[22, 15, 25, 15, 25, 16, 22, 16, 22, 15],
+				[35, 15, 38, 15, 38, 16, 35, 16, 35, 15],
+				[22, 24, 25, 24, 25, 25, 22, 25, 22, 24],
+				[35, 24, 38, 24, 38, 25, 35, 25, 35, 24],
+			]
+		},
+		{
+			speed: 0,
+			angle: 0,
+			lines: [
+				[20, 28, 40, 28, 40, 36, 20, 36, 20, 28],
+				[22, 27, 25, 27, 25, 28, 22, 28, 22, 27],
+				[35, 27, 38, 27, 38, 28, 35, 28, 35, 27],
+				[22, 36, 25, 36, 25, 37, 22, 37, 22, 36],
+				[35, 36, 38, 36, 38, 37, 35, 37, 35, 36],
+			]
+		}
 	];
 }
 
@@ -90,27 +102,13 @@ MyGame.prototype.refresh = function() {
 		context.lineWidth = 1;
 	}
 	{
+		context.save();
+		context.rotate(this.cars[0].angle);
+		//
 		context.fillStyle = '#333';
 		context.beginPath();
-		{
-			var line = this.cars[0][0];
-			for ( var i = 0 ; i < line.length ; i++ ) {
-				if ( i == 0 ) {
-					context.moveTo(this.transformX(line[i]), this.transformY(line[++i]));
-				} else {
-					context.lineTo(this.transformX(line[i]), this.transformY(line[++i]));
-				}
-			}
-			context.closePath();
-			context.fill();
-			context.stroke();
-		}
-	}
-	{
-		context.fillStyle = '#333';
-		context.beginPath();
-		for ( var i = 0 ; i < this.cars[0].length ; i++ ) {
-			var line = this.cars[0][i];
+		for ( var i = 0 ; i < this.cars[0].lines.length ; i++ ) {
+			var line = this.cars[0].lines[i];
 			for ( var j = 0 ; j < line.length ; j++ ) {
 				if ( j == 0 ) {
 					context.moveTo(this.transformX(line[j]), this.transformY(line[++j]));
@@ -122,12 +120,13 @@ MyGame.prototype.refresh = function() {
 			context.fill();
 			context.stroke();
 		}
+		context.restore();
 	}
 	{
 		context.fillStyle = '#00A';
 		context.beginPath();
-		for ( var i = 0 ; i < this.cars[0].length ; i++ ) {
-			var line = this.cars[1][i];
+		for ( var i = 0 ; i < this.cars[0].lines.length ; i++ ) {
+			var line = this.cars[1].lines[i];
 			for ( var j = 0 ; j < line.length ; j++ ) {
 				if ( j == 0 ) {
 					context.moveTo(this.transformX(line[j]), this.transformY(line[++j]));
@@ -143,8 +142,8 @@ MyGame.prototype.refresh = function() {
 	{
 		context.fillStyle = '#040';
 		context.beginPath();
-		for ( var i = 0 ; i < this.cars[0].length ; i++ ) {
-			var line = this.cars[2][i];
+		for ( var i = 0 ; i < this.cars[0].lines.length ; i++ ) {
+			var line = this.cars[2].lines[i];
 			for ( var j = 0 ; j < line.length ; j++ ) {
 				if ( j == 0 ) {
 					context.moveTo(this.transformX(line[j]), this.transformY(line[++j]));
@@ -180,21 +179,15 @@ MyGame.prototype.stop = function() {
 };
 
 MyGame.prototype.move = function(multiplier) {
-	for ( var i = 0 ; i < this.cars[0].length ; i++ ) {
-		var line = this.cars[0][i];
+	for ( var i = 0 ; i < this.cars[0].lines.length ; i++ ) {
+		var line = this.cars[0].lines[i];
 		for ( var j = 0 ; j < line.length ; j++ ) {
-			line[j]+=(5*multiplier);
+			line[j]+=(this.cars[0].speed*multiplier);
 			++j;
 		}
 	}
 };
 
 MyGame.prototype.turn = function(multiplier) {
-	for ( var i = 0 ; i < this.cars[0].length ; i++ ) {
-		var line = this.cars[0][i];
-		for ( var j = 0 ; j < line.length ; j++ ) {
-			line[j + 1]+=(5*multiplier);
-			j++;
-		}
-	}
+	this.cars[0].angle += (multiplier*0.01);
 };
