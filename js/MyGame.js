@@ -127,6 +127,7 @@ MyGame.prototype.refresh = function() {
 	for ( var h = 0 ; h < this.cars.length ; h++ ) {
 		var car = this.cars[h];
 		context.save();
+		context.translate(this.transformX(20), this.transformY(4));
 		context.rotate(car.angle);
 		context.fillStyle = car.fillStyle;
 		context.beginPath();
@@ -134,9 +135,9 @@ MyGame.prototype.refresh = function() {
 			var line = car.lines[i];
 			for ( var j = 0 ; j < line.length ; j++ ) {
 				if ( j == 0 ) {
-					context.moveTo(this.transformX(line[j]), this.transformY(line[++j]));
+					context.moveTo(this.transformX(line[j] - 30), this.transformY(line[++j] - 8));
 				} else {
-					context.lineTo(this.transformX(line[j]), this.transformY(line[++j]));
+					context.lineTo(this.transformX(line[j] - 30), this.transformY(line[++j] - 8));
 				}
 			}
 			context.closePath();
@@ -180,7 +181,7 @@ MyGame.prototype.move = function(multiplier) {
 
 MyGame.prototype.turn = function(multiplier) {
 	var car = this.cars[this.currentCar];
-	car.angle += (multiplier*0.01);
+	car.angle += (multiplier*0.04);
 };
 
 MyGame.prototype.doKeyDown = function(evt) {
