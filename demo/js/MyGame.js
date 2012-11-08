@@ -26,7 +26,7 @@ function MyGame(canvasId) {
 
 	this.offsetX = 10;
 	this.offsetY = 10;
-	this.scale = 10;
+	this.scale = 1;
 
 	this.lineWidth = 1;
 
@@ -72,7 +72,17 @@ function MyGame(canvasId) {
 			]
 		}
 	];
+
+	for ( var i = 0 ; i < this.cars.length ; i++ ) {
+		var car = this.cars[i];
+		car.width = car.lines[0][2] - car.lines[0][0];
+		car.height = car.lines[3][7] - car.lines[1][1];
+		car.left = [0, 0];
+		car.top = [1, 1];
+	}
+
 	this.currentCar = 0;
+
 }
 
 MyGame.prototype.refresh = function() {
@@ -236,3 +246,10 @@ MyGame.prototype.doKeyDown = function(evt) {
 		evt.preventDefault();
 	}
 }
+
+MyGame.prototype.test = function() {
+	for ( var i = 0 ; i < this.cars.length ; i++ ) {
+		var car = this.cars[i];
+		console.log('car ' + i + ': ' + car.width + ', ' + car.height + ' | left: ' + car.lines[car.left[0]][car.left[1]] + ', top: ' + car.lines[car.top[0]][car.top[1]]);
+	}
+};
