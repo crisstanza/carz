@@ -5,6 +5,7 @@
 	function init() {
 		myGame = new MyGame('my-canvas');
 		myGame.start();
+		myGame.test();
 		window.addEventListener('keydown', function(evt) { myGame.doKeyDown(evt); }, true);
 	}
 
