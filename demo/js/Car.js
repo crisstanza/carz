@@ -47,6 +47,20 @@ function Car(parent, n) {
 			[1, 4, 3, 4, 3, 5, 1, 5],
 			[5, 4, 7, 4, 7, 5, 5, 5],
 		];
+
+	} else if ( n == 3 ) {
+		this.speed = 3;
+		this.center = { left: 2, top: 2.5 };
+		this.position = { left: this.center.left + 2, top: this.center.top + 22 };
+		this.color = { stroke: '#443266', fill: '#8C489F' };
+		this.size = { width: 8, height: 6 };
+		this.lines = [
+			[0, 1, 9, 1, 9, 4, 0, 4],
+			[1, 0, 3, 0, 3, 1, 1, 1],
+			[5, 0, 7, 0, 7, 1, 5, 1],
+			[1, 4, 3, 4, 3, 5, 1, 5],
+			[5, 4, 7, 4, 7, 5, 5, 5],
+		];
 	}
 
 }

@@ -10,6 +10,7 @@ function MyGame(canvasId) {
 	MyGame._1 = 49;
 	MyGame._2 = 50;
 	MyGame._3 = 51;
+	MyGame._4 = 52;
 
 	MyGame._Z = 90;
 	MyGame._X = 88;
@@ -23,14 +24,15 @@ function MyGame(canvasId) {
 	this.offsetY = 0;
 	this.scale = 10;
 
-	this.cars = [ this.createCar(0), this.createCar(1), this.createCar(2) ];
+	this.cars = [
+		new Car(this, 0),
+		new Car(this, 1),
+		new Car(this, 2),
+		new Car(this, 3)
+	];
 
 	this.currentCar = 0;
 
-}
-
-MyGame.prototype.createCar = function(n) {
-	return new Car(this, n);
 }
 
 MyGame.prototype.refresh = function() {
@@ -104,6 +106,9 @@ MyGame.prototype.doKeyDown = function(evt) {
 		evt.preventDefault();
 	} else if ( key == MyGame._3 ) {
 		this.currentCar = 2;
+		evt.preventDefault();
+	} else if ( key == MyGame._4 ) {
+		this.currentCar = 3;
 		evt.preventDefault();
 
 	} else if ( key == MyGame._Z ) {
