@@ -1,5 +1,7 @@
 function MyGame(canvasId) {
 
+	MyGame.MAIN_DELAY = 40;
+
 	MyGame._LEFT = 37;
 	MyGame._UP = 38;
 	MyGame._RIGHT = 39;
@@ -19,15 +21,20 @@ function MyGame(canvasId) {
 
 	this.offsetX = 0;
 	this.offsetY = 0;
-	this.scale = 20;
+	this.scale = 10;
 
-	this.cars = [ new Car(this) ];
+	this.cars = [ this.createCar(0), this.createCar(1), this.createCar(2) ];
 
 	this.currentCar = 0;
 
 }
 
+MyGame.prototype.createCar = function(n) {
+	return new Car(this, n);
+}
+
 MyGame.prototype.refresh = function() {
+	this.checkControl();
 	var canvas = this.canvas;
 	var context = canvas.getContext('2d');
 	context.clearRect(0, 0, canvas.width, canvas.height);
@@ -41,17 +48,24 @@ MyGame.prototype.draw = function() {
 	}
 };
 
-MyGame.prototype.transformX = function(value) {
+MyGame.prototype.checkControl = function() {
+	for ( var i = 0 ; i < this.cars.length ; i++ ) {
+		var car = this.cars[i];
+		car.checkControl();
+	}
+};
+
+MyGame.prototype.tX = function(value) {
 	return value * this.scale + this.offsetX;
 };
 
-MyGame.prototype.transformY = function(value) {
+MyGame.prototype.tY = function(value) {
 	return value * this.scale + this.offsetY;
 };
 
 MyGame.prototype.start = function() {
 	var instance = this;
-	this.mainLoop = setInterval(function() { instance.refresh(); }, 40);
+	this.mainLoop = setInterval(function() { instance.refresh(); }, MyGame.MAIN_DELAY);
 };
 
 MyGame.prototype.stop = function() {
@@ -64,18 +78,24 @@ MyGame.prototype.stop = function() {
 MyGame.prototype.doKeyDown = function(evt) {
 	var key = evt.keyCode;
 	var car = this.cars[this.currentCar];
+
 	if ( key == MyGame._LEFT ) {
-		car.turn(-1);
+		car.control.right = false;
+		car.control.left = true;
 		evt.preventDefault();
 	} else if ( key == MyGame._UP ) {
-		car.move(1);
+		car.control.down = false;
+		car.control.up = true;
 		evt.preventDefault();
 	} else if ( key == MyGame._RIGHT ) {
-		car.turn(1);
+		car.control.left = false;
+		car.control.right = true;
 		evt.preventDefault();
 	} else if ( key == MyGame._DOWN ) {
-		car.move(-1);
+		car.control.up = false;
+		car.control.down = true;
 		evt.preventDefault();
+
 	} else if ( key == MyGame._1 ) {
 		this.currentCar = 0;
 		evt.preventDefault();
@@ -85,11 +105,31 @@ MyGame.prototype.doKeyDown = function(evt) {
 	} else if ( key == MyGame._3 ) {
 		this.currentCar = 2;
 		evt.preventDefault();
+
 	} else if ( key == MyGame._Z ) {
-		this.scale *= 0.75;
+		this.scale *= 0.95;
 		evt.preventDefault();
 	} else if ( key == MyGame._X ) {
-		this.scale *= 1.25;
+		this.scale *= 1.05;
+		evt.preventDefault();
+	}
+}
+
+MyGame.prototype.doKeyUp = function(evt) {
+	var key = evt.keyCode;
+	var car = this.cars[this.currentCar];
+
+	if ( key == MyGame._LEFT ) {
+		car.control.left = false;
+		evt.preventDefault();
+	} else if ( key == MyGame._UP ) {
+		car.control.up = false;
+		evt.preventDefault();
+	} else if ( key == MyGame._RIGHT ) {
+		car.control.right = false;
+		evt.preventDefault();
+	} else if ( key == MyGame._DOWN ) {
+		car.control.down = false;
 		evt.preventDefault();
 	}
 }
@@ -97,7 +137,6 @@ MyGame.prototype.doKeyDown = function(evt) {
 MyGame.prototype.test = function() {
 	for ( var i = 0 ; i < this.cars.length ; i++ ) {
 		var car = this.cars[i];
-		console.log(i);
-		console.log(car);
+		console.log('car ' + i + ': ', car);
 	}
 };

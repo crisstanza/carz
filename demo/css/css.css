@@ -1,5 +1,14 @@
+body {
+	font-family: Verdana;
+	font-size: 10pt;
+}
 canvas.my-canvas {
 	border: 1px solid #000;
-	/* background-color: #0A0; */
 	background-color: #EEE;
+	float: left;
+}
+div.my-legend {
+	margin-left: 15px;
+	float: left;
+	width: 170px;
 }
