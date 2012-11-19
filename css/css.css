@@ -1,0 +1,17 @@
+body {
+	font-family: Verdana;
+	font-size: 10pt;
+}
+form.my-form {
+	border: 1px solid #000;
+	background-color: #EEE;
+	float: left;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: url(../img/car-1.png);
+}
+
+form.my-form input {
+	width: 8px;
+	margin: 8px;
+}
