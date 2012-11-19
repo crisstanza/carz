@@ -1,7 +1,7 @@
 (function() {
 
 	var rows = 12;
-	var cols = 29;
+	var cols = 21;
 
 	function init() {
 		var myForm = document.forms['my-form'];
