@@ -3,7 +3,7 @@ function Car(parent, n) {
 	this.parent = parent;
 	this.angle = 0;
 	this.control = { up: false, down: false, left: false, right: false };
-	this.drawBoundingBox = true;
+	this.drawBoundingBox = false;
 	this.drawCenter = true;
 
 	if ( n == 0 ) {
@@ -90,7 +90,7 @@ Car.prototype.draw = function() {
 	if ( this.drawBoundingBox ) {
 		context.strokeStyle = this.colors[0].stroke;
 		context.fillStyle = this.colors[0].fill;
-		context.globalAlpha = 0.1;
+		context.globalAlpha = 0.2;
 		context.beginPath();
 		context.moveTo(this.parent.tX(-this.center.left), this.parent.tY(-this.center.top));
 		context.lineTo(this.parent.tX(this.size.width - this.center.left), this.parent.tY(-this.center.top));

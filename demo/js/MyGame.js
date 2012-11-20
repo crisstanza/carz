@@ -51,6 +51,10 @@ MyGame.prototype.draw = function() {
 };
 
 MyGame.prototype.checkControl = function() {
+	var showBoundingBox = document.getElementById('show-bounding-box');
+	var car = this.cars[this.currentCar];
+	car.drawBoundingBox = showBoundingBox.checked;
+
 	for ( var i = 0 ; i < this.cars.length ; i++ ) {
 		var car = this.cars[i];
 		car.checkControl();
