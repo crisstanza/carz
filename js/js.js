@@ -60,7 +60,7 @@
 			sb.push(point.left);
 			sb.push(point.top);
 		}
-		return '[ ' + sb.join(', ') + ' ]';
+		return '[' + sb.join(', ') + ']';
 	}
 
 	function doClear(evt) {
