@@ -50,16 +50,24 @@ function Car(parent, n) {
 
 	} else if ( n == 3 ) {
 		this.speed = 3;
-		this.center = { left: 2, top: 2.5 };
+		this.center = { left: 5, top: 5.5 };
 		this.position = { left: this.center.left + 2, top: this.center.top + 22 };
-		this.colors = [ { stroke: '#F00', fill: '#C00' }, { stroke: '#443266', fill: '#8C489F' } ];
-		this.size = { width: 9, height: 5 };
+		this.colors = [ { stroke: '#443266', fill: '#8C489F' }, { stroke: '#8C489F', fill: '#443266' }, { stroke: '#8C489F', fill: '#FFF' } ];
+		this.size = { width: 20, height: 11 };
 		this.lines = [
-			{ color: 0, points: [0, 1, 9, 1, 9, 4, 0, 4] },
-			{ color: 1, points: [1, 0, 3, 0, 3, 1, 1, 1] },
-			{ color: 1, points: [5, 0, 7, 0, 7, 1, 5, 1] },
-			{ color: 1, points: [1, 4, 3, 4, 3, 5, 1, 5] },
-			{ color: 1, points: [5, 4, 7, 4, 7, 5, 5, 5] }
+			{ color: 0, points: [0, 2, 3, 1, 18, 1, 20, 4, 20, 7, 18, 10, 3, 10, 0, 9] },
+			{ color: 1, points: [3, 0, 8, 0, 8, 1, 3, 1] },
+			{ color: 1, points: [11, 0, 16, 0, 16, 1, 11, 1] },
+			{ color: 1, points: [11, 10, 16, 10, 16, 11, 11, 11] },
+			{ color: 1, points: [3, 10, 8, 10, 8, 11, 3, 11] },
+			{ color: 1, points: [11, 4, 12, 3, 14, 2, 15, 4, 15, 7, 14, 9, 12, 8, 11, 7] },
+			{ color: 1, points: [4, 3, 4, 8, 2, 7, 2, 4] },
+			{ color: 1, points: [6, 2, 11, 2, 8, 3, 6, 3] },
+			{ color: 1, points: [6, 8, 8, 8, 11, 9, 6, 9] },
+			{ color: 2, points: [15, 5, 20, 5, 20, 6, 15, 6] },
+			{ color: 2, points: [15, 5, 20, 5, 20, 6, 15, 6] },
+			{ color: 2, points: [4, 5, 11, 5, 11, 6, 4, 6] },
+			{ color: 2, points: [0, 5, 2, 5, 2, 6, 0, 6] }
 		];
 	}
 

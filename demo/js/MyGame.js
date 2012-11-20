@@ -51,9 +51,13 @@ MyGame.prototype.draw = function() {
 };
 
 MyGame.prototype.checkControl = function() {
-	var showBoundingBox = document.getElementById('show-bounding-box');
 	var car = this.cars[this.currentCar];
+
+	var showBoundingBox = document.getElementById('show-bounding-box');
 	car.drawBoundingBox = showBoundingBox.checked;
+
+	var showCenter = document.getElementById('show-center');
+	car.drawCenter = showCenter.checked;
 
 	for ( var i = 0 ; i < this.cars.length ; i++ ) {
 		var car = this.cars[i];
