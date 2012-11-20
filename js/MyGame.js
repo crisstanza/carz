@@ -22,7 +22,7 @@ function MyGame(canvasId) {
 
 	this.offsetX = 0;
 	this.offsetY = 0;
-	this.scale = 10;
+	this.scale = 5;
 
 	this.cars = [
 		new Car(this, 0),
@@ -30,6 +30,8 @@ function MyGame(canvasId) {
 		new Car(this, 2),
 		new Car(this, 3)
 	];
+
+	this.track = new Track(this, 0);
 
 	this.currentCar = 0;
 
@@ -44,6 +46,7 @@ MyGame.prototype.refresh = function() {
 };
 
 MyGame.prototype.draw = function() {
+	this.track.draw();
 	for ( var i = 0 ; i < this.cars.length ; i++ ) {
 		var car = this.cars[i];
 		car.draw();
@@ -148,6 +151,8 @@ MyGame.prototype.doKeyUp = function(evt) {
 }
 
 MyGame.prototype.test = function() {
+	console.log('track: ', this.track);
+
 	for ( var i = 0 ; i < this.cars.length ; i++ ) {
 		var car = this.cars[i];
 		console.log('car ' + i + ': ', car);

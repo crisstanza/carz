@@ -9,7 +9,7 @@ function Car(parent, n) {
 	if ( n == 0 ) {
 		this.speed = 1;
 		this.center = { left: 2, top: 3 };
-		this.position = { left: this.center.left + 3, top: this.center.top + 1 };
+		this.position = { left: this.center.left + 30, top: this.center.top + 4 };
 		this.colors = [ { stroke: '#C00', fill: '#F00' } ];
 		this.size = { width: 8, height: 6 };
 		this.lines = [
@@ -23,7 +23,7 @@ function Car(parent, n) {
 	} else if ( n == 1 ) {
 		this.speed = 1.5;
 		this.center = { left: 3, top: 3 };
-		this.position = { left: this.center.left + 1, top: this.center.top + 8 };
+		this.position = { left: this.center.left + 28, top: this.center.top + 12 };
 		this.colors = [ { stroke: '#0C0', fill: '#0F0' } ];
 		this.size = { width: 10, height: 6 };
 		this.lines = [
@@ -37,7 +37,7 @@ function Car(parent, n) {
 	} else if ( n == 2 ) {
 		this.speed = 2;
 		this.center = { left: 2, top: 2.5 };
-		this.position = { left: this.center.left + 2, top: this.center.top + 15 };
+		this.position = { left: this.center.left + 29, top: this.center.top + 20 };
 		this.colors = [ { stroke: '#00C', fill: '#00F' } ];
 		this.size = { width: 9, height: 5 };
 		this.lines = [
@@ -51,7 +51,7 @@ function Car(parent, n) {
 	} else if ( n == 3 ) {
 		this.speed = 3;
 		this.center = { left: 5, top: 5.5 };
-		this.position = { left: this.center.left + 2, top: this.center.top + 22 };
+		this.position = { left: this.center.left + 18, top: this.center.top + 28 };
 		this.colors = [ { stroke: '#443266', fill: '#8C489F' }, { stroke: '#8C489F', fill: '#443266' }, { stroke: '#8C489F', fill: '#FFF' } ];
 		this.size = { width: 20, height: 11 };
 		this.lines = [
@@ -92,7 +92,7 @@ Car.prototype.draw = function() {
 	var context = canvas.getContext('2d');
 	context.save();
 
-	context.translate(this.parent.tX(this.position.left), this.parent.tX(this.position.top));
+	context.translate(this.parent.tX(this.position.left), this.parent.tY(this.position.top));
 	context.rotate(this.angle * Math.PI / 180);
 
 	if ( this.drawBoundingBox ) {
